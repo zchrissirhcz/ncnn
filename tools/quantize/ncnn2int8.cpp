@@ -149,7 +149,7 @@ int NetQuantize::quantize_convolution()
             continue;
 
         char key[256];
-        sprintf(key, "%s_param_0", layers[i]->name.c_str());
+        snprintf(key, sizeof(key), "%s_param_0", layers[i]->name.c_str());
 
         std::map<std::string, ncnn::Mat>::iterator iter = weight_int8scale_table.find(key);
         if (iter == weight_int8scale_table.end())
@@ -207,7 +207,7 @@ int NetQuantize::quantize_convolutiondepthwise()
             continue;
 
         char key[256];
-        sprintf(key, "%s_param_0", layers[i]->name.c_str());
+        snprintf(key, sizeof(key), "%s_param_0", layers[i]->name.c_str());
 
         std::map<std::string, ncnn::Mat>::iterator iter = weight_int8scale_table.find(key);
         if (iter == weight_int8scale_table.end())
@@ -269,7 +269,7 @@ int NetQuantize::quantize_innerproduct()
             continue;
 
         char key[256];
-        sprintf(key, "%s_param_0", layers[i]->name.c_str());
+        snprintf(key, sizeof(key), "%s_param_0", layers[i]->name.c_str());
 
         std::map<std::string, ncnn::Mat>::iterator iter = weight_int8scale_table.find(key);
         if (iter == weight_int8scale_table.end())

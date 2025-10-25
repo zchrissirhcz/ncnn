@@ -111,8 +111,9 @@ int DataReaderFromMemory::scan(const char* format, void* p) const
 {
     size_t fmtlen = strlen(format);
 
-    char* format_with_n = new char[fmtlen + 4];
-    sprintf(format_with_n, "%s%%n", format);
+    const size_t bufsize = fmtlen + 4;
+    char* format_with_n = new char[bufsize];
+    snprintf(format_with_n, bufsize, "%s%%n", format);
 
     int nconsumed = 0;
     int nscan = sscanf((const char*)d->mem, format_with_n, p, &nconsumed);
@@ -202,10 +203,11 @@ int DataReaderFromAndroidAsset::scan(const char* format, void* p) const
         line = std::string((const char*)d->mem, line_length);
     }
 
-    int fmtlen = strlen(format);
+    size_t fmtlen = strlen(format);
 
-    char* format_with_n = new char[fmtlen + 3];
-    sprintf(format_with_n, "%s%%n", format);
+    const size_t bufsize = fmtlen + 3;
+    char* format_with_n = new char[bufsize];
+    snprintf(format_with_n, bufsize, "%s%%n", format);
 
     int nconsumed = 0;
     int nscan = sscanf(line.c_str(), format_with_n, p, &nconsumed);

@@ -267,7 +267,7 @@ static void draw_objects(const cv::Mat& bgr, const std::vector<Object>& objects)
         fprintf(stderr, "%d = %.5f\n", obj.label, obj.prob);
 
         char text[256];
-        sprintf(text, "%4.1f%% %s", obj.prob * 100, class_names[obj.label]);
+        snprintf(text, sizeof(text), "%4.1f%% %s", obj.prob * 100, class_names[obj.label]);
 
         int baseLine = 0;
         cv::Size label_size = cv::getTextSize(text, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);

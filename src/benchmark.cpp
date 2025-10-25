@@ -102,36 +102,36 @@ void benchmark(const Layer* layer, const Mat& bottom_blob, Mat& top_blob, double
 
     if (bottom_blob.dims == 1)
     {
-        sprintf(in_shape_str, "[%3d *%d]", bottom_blob.w, bottom_blob.elempack);
+        snprintf(in_shape_str, sizeof(in_shape_str), "[%3d *%d]", bottom_blob.w, bottom_blob.elempack);
     }
     if (bottom_blob.dims == 2)
     {
-        sprintf(in_shape_str, "[%3d, %3d *%d]", bottom_blob.w, bottom_blob.h, bottom_blob.elempack);
+        snprintf(in_shape_str, sizeof(in_shape_str), "[%3d, %3d *%d]", bottom_blob.w, bottom_blob.h, bottom_blob.elempack);
     }
     if (bottom_blob.dims == 3)
     {
-        sprintf(in_shape_str, "[%3d, %3d, %3d *%d]", bottom_blob.w, bottom_blob.h, bottom_blob.c, bottom_blob.elempack);
+        snprintf(in_shape_str, sizeof(in_shape_str), "[%3d, %3d, %3d *%d]", bottom_blob.w, bottom_blob.h, bottom_blob.c, bottom_blob.elempack);
     }
     if (bottom_blob.dims == 4)
     {
-        sprintf(in_shape_str, "[%3d, %3d, %3d, %3d *%d]", bottom_blob.w, bottom_blob.h, bottom_blob.d, bottom_blob.c, bottom_blob.elempack);
+        snprintf(in_shape_str, sizeof(in_shape_str), "[%3d, %3d, %3d, %3d *%d]", bottom_blob.w, bottom_blob.h, bottom_blob.d, bottom_blob.c, bottom_blob.elempack);
     }
 
     if (top_blob.dims == 1)
     {
-        sprintf(out_shape_str, "[%3d *%d]", top_blob.w, top_blob.elempack);
+        snprintf(out_shape_str, sizeof(out_shape_str), "[%3d *%d]", top_blob.w, top_blob.elempack);
     }
     if (top_blob.dims == 2)
     {
-        sprintf(out_shape_str, "[%3d, %3d *%d]", top_blob.w, top_blob.h, top_blob.elempack);
+        snprintf(out_shape_str, sizeof(out_shape_str), "[%3d, %3d *%d]", top_blob.w, top_blob.h, top_blob.elempack);
     }
     if (top_blob.dims == 3)
     {
-        sprintf(out_shape_str, "[%3d, %3d, %3d *%d]", top_blob.w, top_blob.h, top_blob.c, top_blob.elempack);
+        snprintf(out_shape_str, sizeof(out_shape_str), "[%3d, %3d, %3d *%d]", top_blob.w, top_blob.h, top_blob.c, top_blob.elempack);
     }
     if (top_blob.dims == 4)
     {
-        sprintf(out_shape_str, "[%3d, %3d, %3d, %3d *%d]", top_blob.w, top_blob.h, top_blob.d, top_blob.c, top_blob.elempack);
+        snprintf(out_shape_str, sizeof(out_shape_str), "[%3d, %3d, %3d, %3d *%d]", top_blob.w, top_blob.h, top_blob.d, top_blob.c, top_blob.elempack);
     }
 
     fprintf(stderr, "    | %22s -> %-22s", in_shape_str, out_shape_str);

@@ -376,7 +376,7 @@ static void draw_faceobjects(const cv::Mat& bgr, const std::vector<FaceObject>& 
         cv::circle(image, obj.landmark[4], 2, cv::Scalar(0, 255, 255), -1);
 
         char text[256];
-        sprintf(text, "%.1f%%", obj.prob * 100);
+        snprintf(text, sizeof(text), "%.1f%%", obj.prob * 100);
 
         int baseLine = 0;
         cv::Size label_size = cv::getTextSize(text, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);

@@ -919,7 +919,7 @@ static int get_cpucount()
 static int get_thread_siblings(int cpuid)
 {
     char path[256];
-    sprintf(path, "/sys/devices/system/cpu/cpu%d/topology/thread_siblings", cpuid);
+    snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/topology/thread_siblings", cpuid);
 
     FILE* fp = 0; //fopen(path, "rb");
     if (fp)
@@ -937,7 +937,7 @@ static int get_thread_siblings(int cpuid)
     }
 
     // second try, parse from human-readable thread_siblings_list
-    sprintf(path, "/sys/devices/system/cpu/cpu%d/topology/thread_siblings_list", cpuid);
+    snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/topology/thread_siblings_list", cpuid);
 
     fp = fopen(path, "rb");
     if (fp)
@@ -1072,7 +1072,7 @@ static int get_data_cache_size(int cpuid, int level)
     {
         // check level
         {
-            sprintf(path, "/sys/devices/system/cpu/cpu%d/cache/index%d/level", cpuid, i);
+            snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/cache/index%d/level", cpuid, i);
             FILE* fp = fopen(path, "rb");
             if (!fp)
                 break;
@@ -1086,7 +1086,7 @@ static int get_data_cache_size(int cpuid, int level)
 
         // check type
         {
-            sprintf(path, "/sys/devices/system/cpu/cpu%d/cache/index%d/type", cpuid, i);
+            snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/cache/index%d/type", cpuid, i);
             FILE* fp = fopen(path, "rb");
             if (!fp)
                 break;
@@ -1111,7 +1111,7 @@ static int get_data_cache_size(int cpuid, int level)
     // get size
     int cache_size_K = 0;
     {
-        sprintf(path, "/sys/devices/system/cpu/cpu%d/cache/index%d/size", cpuid, indexid);
+        snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/cache/index%d/size", cpuid, indexid);
         FILE* fp = fopen(path, "rb");
         if (!fp)
             return 0;
@@ -1128,7 +1128,7 @@ static int get_data_cache_size(int cpuid, int level)
     // parse shared_cpu_map mask
     ncnn::CpuSet shared_cpu_map;
     {
-        sprintf(path, "/sys/devices/system/cpu/cpu%d/cache/index%d/shared_cpu_map", cpuid, indexid);
+        snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/cache/index%d/shared_cpu_map", cpuid, indexid);
         FILE* fp = fopen(path, "rb");
         if (!fp)
             return 0;
@@ -1448,14 +1448,14 @@ static int get_max_freq_khz(int cpuid)
 {
     // first try, for all possible cpu
     char path[256];
-    sprintf(path, "/sys/devices/system/cpu/cpufreq/stats/cpu%d/time_in_state", cpuid);
+    snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpufreq/stats/cpu%d/time_in_state", cpuid);
 
     FILE* fp = fopen(path, "rb");
 
     if (!fp)
     {
         // second try, for online cpu
-        sprintf(path, "/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state", cpuid);
+        snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state", cpuid);
         fp = fopen(path, "rb");
 
         if (fp)
@@ -1483,7 +1483,7 @@ static int get_max_freq_khz(int cpuid)
         if (!fp)
         {
             // third try, for online cpu
-            sprintf(path, "/sys/devices/system/cpu/cpu%d/cpufreq/cpuinfo_max_freq", cpuid);
+            snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/cpufreq/cpuinfo_max_freq", cpuid);
             fp = fopen(path, "rb");
 
             if (!fp)
@@ -1522,13 +1522,13 @@ static bool is_smt_cpu(int cpuid)
 {
     // https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/stable/sysfs-devices-system-cpu#L68-72
     char path[256];
-    sprintf(path, "/sys/devices/system/cpu/cpu%d/topology/core_cpus_list", cpuid);
+    snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/topology/core_cpus_list", cpuid);
 
     FILE* fp = fopen(path, "rb");
 
     if (!fp)
     {
-        sprintf(path, "/sys/devices/system/cpu/cpu%d/topology/thread_siblings_list", cpuid);
+        snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/topology/thread_siblings_list", cpuid);
         fp = fopen(path, "rb");
 
         if (!fp)
@@ -1847,7 +1847,7 @@ union midr_info_t
 static unsigned int get_midr_from_sysfs(int cpuid)
 {
     char path[256];
-    sprintf(path, "/sys/devices/system/cpu/cpu%d/regs/identification/midr_el1", cpuid);
+    snprintf(path, sizeof(path), "/sys/devices/system/cpu/cpu%d/regs/identification/midr_el1", cpuid);
 
     FILE* fp = fopen(path, "rb");
     if (!fp)

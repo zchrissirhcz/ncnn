@@ -2839,28 +2839,28 @@ int create_gpu_instance(const char* driver_path)
             {
                 const VkCooperativeMatrixPropertiesKHR& cmp = fp16_matrix_properties[j];
                 char tmp[64];
-                sprintf(tmp, j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
+                snprintf(tmp, sizeof(tmp), j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
                 fp16_matrix_info_str += tmp;
             }
             for (uint32_t j = 0; j < int8_matrix_properties.size(); j++)
             {
                 const VkCooperativeMatrixPropertiesKHR& cmp = int8_matrix_properties[j];
                 char tmp[64];
-                sprintf(tmp, j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
+                snprintf(tmp, sizeof(tmp), j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
                 int8_matrix_info_str += tmp;
             }
             for (uint32_t j = 0; j < bf16_matrix_properties.size(); j++)
             {
                 const VkCooperativeMatrixPropertiesKHR& cmp = bf16_matrix_properties[j];
                 char tmp[64];
-                sprintf(tmp, j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
+                snprintf(tmp, sizeof(tmp), j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
                 bf16_matrix_info_str += tmp;
             }
             for (uint32_t j = 0; j < fp8_matrix_properties.size(); j++)
             {
                 const VkCooperativeMatrixPropertiesKHR& cmp = fp8_matrix_properties[j];
                 char tmp[64];
-                sprintf(tmp, j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
+                snprintf(tmp, sizeof(tmp), j > 0 ? "/%ux%ux%u" : "%ux%ux%u", cmp.MSize, cmp.NSize, cmp.KSize);
                 fp8_matrix_info_str += tmp;
             }
 
@@ -5396,31 +5396,31 @@ int compile_spirv_module(const char* comp_data, int comp_data_size, const Option
             char defstr[256];
             if (def.type == 1)
             {
-                sprintf(defstr, "%u", def.u8);
+                snprintf(defstr, sizeof(defstr), "%u", def.u8);
             }
             if (def.type == 2)
             {
-                sprintf(defstr, "%u", def.u32);
+                snprintf(defstr, sizeof(defstr), "%u", def.u32);
             }
             if (def.type == 3)
             {
-                sprintf(defstr, "%d", def.i32);
+                snprintf(defstr, sizeof(defstr), "%d", def.i32);
             }
             if (def.type == 4)
             {
                 if (support_shader_int64)
                 {
-                    sprintf(defstr, "%luull", def.u64);
+                    snprintf(defstr, sizeof(defstr), "%luull", def.u64);
                 }
                 else
                 {
                     uint32_t u32 = def.u64 > UINT_MAX ? UINT_MAX : (uint32_t)def.u64;
-                    sprintf(defstr, "%u", u32);
+                    snprintf(defstr, sizeof(defstr), "%u", u32);
                 }
             }
             if (def.type == 5)
             {
-                sprintf(defstr, "%e", def.f32);
+                snprintf(defstr, sizeof(defstr), "%e", def.f32);
             }
 
             define_macro_data += std::string("#define ") + key + " " + defstr + "\n";
@@ -5440,31 +5440,31 @@ int compile_spirv_module(const char* comp_data, int comp_data_size, const Option
             char defstr[256];
             if (def.type == 1)
             {
-                sprintf(defstr, "%u", def.u8);
+                snprintf(defstr, sizeof(defstr), "%u", def.u8);
             }
             if (def.type == 2)
             {
-                sprintf(defstr, "%u", def.u32);
+                snprintf(defstr, sizeof(defstr), "%u", def.u32);
             }
             if (def.type == 3)
             {
-                sprintf(defstr, "%d", def.i32);
+                snprintf(defstr, sizeof(defstr), "%d", def.i32);
             }
             if (def.type == 4)
             {
                 if (support_shader_int64)
                 {
-                    sprintf(defstr, "%luull", def.u64);
+                    snprintf(defstr, sizeof(defstr), "%luull", def.u64);
                 }
                 else
                 {
                     uint32_t u32 = def.u64 > UINT_MAX ? UINT_MAX : (uint32_t)def.u64;
-                    sprintf(defstr, "%u", u32);
+                    snprintf(defstr, sizeof(defstr), "%u", u32);
                 }
             }
             if (def.type == 5)
             {
-                sprintf(defstr, "%e", def.f32);
+                snprintf(defstr, sizeof(defstr), "%e", def.f32);
             }
 
             define_macro_data += std::string("#define ncnn_") + key + " " + defstr + "\n";

@@ -432,7 +432,7 @@ static void draw_objects_coco(const cv::Mat& bgr, const std::vector<Object>& obj
         cv::rectangle(image, obj.rect, color);
 
         char text[256];
-        sprintf(text, "%s %.1f%%", class_names[obj.label], obj.prob * 100);
+        snprintf(text, sizeof(text), "%s %.1f%%", class_names[obj.label], obj.prob * 100);
 
         int baseLine = 0;
         cv::Size label_size = cv::getTextSize(text, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);
@@ -571,7 +571,7 @@ static void draw_objects_oiv(const cv::Mat& bgr, const std::vector<Object>& obje
         cv::rectangle(image, obj.rect, color);
 
         char text[256];
-        sprintf(text, "%s %.1f%%", class_names[obj.label], obj.prob * 100);
+        snprintf(text, sizeof(text), "%s %.1f%%", class_names[obj.label], obj.prob * 100);
 
         int baseLine = 0;
         cv::Size label_size = cv::getTextSize(text, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);

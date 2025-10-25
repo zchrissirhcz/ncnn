@@ -228,7 +228,7 @@ public:
                 int timestamp = (token_id - token_timestamp_first) * 2;
 
                 char tmp[256];
-                sprintf(tmp, " [%d.%02d] ", timestamp / 100, timestamp % 100);
+                snprintf(tmp, sizeof(tmp), " [%d.%02d] ", timestamp / 100, timestamp % 100);
 
                 if (in_timestamp)
                 {

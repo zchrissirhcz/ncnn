@@ -87,7 +87,7 @@ void benchmark(const char* comment, const std::vector<ncnn::Mat>& _in, const ncn
     if (fixed_path)
     {
         char parampath[256];
-        sprintf(parampath, MODEL_DIR "%s.param", comment);
+        snprintf(parampath, sizeof(parampath), MODEL_DIR "%s.param", comment);
         net.load_param(parampath);
     }
     else
